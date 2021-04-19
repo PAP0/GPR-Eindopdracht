@@ -14,6 +14,9 @@ public class Tween
     public bool CanDelete;
 
     private Func<float, float> EaseMethod;
+    private Action OnTweenStart;
+    private Action OnTweenUpdate;
+    private Action OnTweenComplete;
 
     public Tween(GameObject objectToMove, float speed, Func<float, float> easeMethod)
     {
@@ -25,6 +28,11 @@ public class Tween
 
         EaseMethod = easeMethod;
 
+        Debug.Log("Tween Started");
+    }
+
+    public OnTweenStart()
+    {
         Debug.Log("Tween Started");
     }
 
@@ -44,23 +52,32 @@ public class Tween
             OnTweenComplete();
         }
 
-    }
-
-    protected virtual void PerformTween(float easeStep) 
-    { 
-        
-    }
-
-    protected virtual void OnTweenComplete()
+    }    
+    
+    public OnTweenUpdate()
     {
+        _percent += dt / _speed;
 
+        if(_percent < 1)
+        {
+            Debug.Log(_gameObject + ": Tween Update");
+        }
     }
-
-
+    
     public bool IsFinished()
     {
         return _isFinished;
     }
+
+    public OnTweenComplete()
+    {
+        if(OnTweenComplete !=null)
+        {
+            Destroy(GameObject.FindGameObjectWithTag("Machine"));
+            Debug.log("Complete");
+        }
+    }
+
 }
 /*
 IEnumerator Opdracht2(float duration)
