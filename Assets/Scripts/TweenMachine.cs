@@ -8,6 +8,7 @@ public class TweenMachine : MonoBehaviour
     private static TweenMachine instance;
     private List<Tween> _activeTweens = new List<Tween>();
     private Dictionary<EasingType, Func<float, float>> easingCombiner = new Dictionary<EasingType, Func<float, float>>();
+    public bool CanDelete;
 
 
     private void Awake()
@@ -75,6 +76,7 @@ public class TweenMachine : MonoBehaviour
 
             if(_activeTweens[i].IsFinished())
             {
+                CanDelete = true;
                 _activeTweens.RemoveAt(i);
                 i -= 1;
                 Debug.Log("finished Tween!");
@@ -95,6 +97,13 @@ public class TweenMachine : MonoBehaviour
         TweenRotate newTween = new TweenRotate(objectRotate, targetRotation, RotationSpeed, easingCombiner[type]);
         _activeTweens.Add(newTween);
     }
+    public void ScaleGameObject(GameObject objectScale, Vector3 targetScale, float ScaleSpeed, EasingType type)
+    {
+        Debug.Log(type);
+        TweenScale newTween = new TweenScale(objectScale, targetScale, ScaleSpeed, easingCombiner[type]);
+        _activeTweens.Add(newTween);
+    }
+
 
     public static TweenMachine GetInstance()
     {

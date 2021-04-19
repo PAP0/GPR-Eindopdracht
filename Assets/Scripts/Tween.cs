@@ -11,6 +11,7 @@ public class Tween
     private float _speed;
     private float _percent;
     private bool _isFinished = false;
+    public bool CanDelete;
 
     private Func<float, float> EaseMethod;
 

@@ -10,7 +10,7 @@ public class TweenPosition : Tween
     protected override void PerformTween(float easeStep)
     {
         _gameObject.transform.position = _startPosition + (_direction * easeStep);
-        Debug.Log("BEWEEGING!");
+        Debug.Log("BEWEGING!");
     }
     protected override void OnTweenComplete()
     {

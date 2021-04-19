@@ -10,6 +10,7 @@ public class TweenRotate : Tween
     protected override void PerformTween(float easeStep)
     {
         _gameObject.transform.rotation = Quaternion.Euler(_startPosition + (_direction * easeStep));
+        Debug.Log("Rotation!");
     }
     protected override void OnTweenComplete()
     {
